@@ -1,7 +1,8 @@
 {
   "name": "ecopay-sdk",
-  "version": "1.0.2",
-  "description": "A template for creating npm packages using TypeScript and VSCode",
+  "title": "EcoPay SDK",
+  "version": "1.0.0",
+  "description": "SDK for EcoPay Payment Platform",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [

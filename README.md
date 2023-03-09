@@ -1,4 +1,4 @@
-# my-package-name
+# ecopay-sdk
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
