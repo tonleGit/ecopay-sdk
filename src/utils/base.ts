@@ -1,1 +1,1 @@
-export const getVersion = (): string => '1.0.2';
+export const getVersion = (): string => 'EcoPaySDK v1.0.5';
