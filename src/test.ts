@@ -1,4 +1,7 @@
-import { EcoPaySDK } from '.';
+/* eslint-disable prefer-rest-params */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { EcoPaySDK } from './features';
 
 const sampleData = {
   merchant_code: 'FVMER0',
@@ -19,8 +22,56 @@ const sampleData = {
   payment_type: '05',
 };
 
-const ecopay = new EcoPaySDK({ secretKey: '1234', merchantCode: 'FVMER0' });
-ecopay
-  .getSupportBanks()
+const tokenizationData = {
+  merchant_user_id: 'testABC',
+  redirect_url: 'https://example.com/',
+  description: 'test tao tokenization',
+  platform: 'web',
+  bank_type: 'international',
+  store_code: '0344567890',
+};
+// ecopay
+//   .getSupportBanks()
+//   .then(data => console.log('data', data))
+//   .catch(err => console.error(err));
+
+const updateTokenData = {
+  merchant_user_id: 'test01',
+  status: 'inactive',
+  bank_type: 'international',
+};
+// console.log(JSON.stringify(tokenizationData));
+// ecopay
+//   .initTokenization(tokenizationData)
+//   .then(data => console.log('data', data))
+//   .catch(err => console.error('Error:', err));
+
+// export function initEcoPaySDK(ecopayConfig: IInitSdkConfig): EcoPaySDK {
+//   const ecopaySdkIns = new EcoPaySDK(ecopayConfig);
+//   return new Proxy<EcoPaySDK>(ecopaySdkIns, {
+//     get: function (target, p, receiver) {
+//       const validateErrorMessage =
+//         (!target.merchantCode && 'Merchant code is missing') ||
+//         (!target.secretKey && 'Merchant secret key is missing') ||
+//         (!target.gateway && 'Merchant gateway is missing') ||
+//         '';
+//       if (validateErrorMessage) {
+//         throw new Error(validateErrorMessage);
+//       }
+//       // @ts-ignore
+//       return Reflect.get(...arguments);
+//     },
+//   });
+// }
+
+const ecp = new EcoPaySDK({
+  merchantCode: 'FVMER0',
+  secretKey: '1234',
+});
+
+ecp
+  .checkTransaction('testsdk35b980f5ei')
   .then(data => console.log('data', data))
-  .catch(err => console.error(err));
+  .catch(err => console.error('Error:', err));
+
+// console.log(ecp.test());

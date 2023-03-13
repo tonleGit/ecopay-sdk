@@ -119,3 +119,4 @@ dist
 lib/
 package-lock.json
 .npmignore
+src/test.ts

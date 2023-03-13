@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -16,25 +17,27 @@ import {
   IGetSupportBanks,
 } from '../types';
 import { getFinalData, makeRequest } from '../utils';
-import { Tokenization } from './tokenization';
-export { Tokenization };
+import { TokenizationSDK } from './tokenization';
+export { TokenizationSDK };
 export class EcoPaySDK {
-  #merchantCode = '';
-  #secretKey = '';
-  #gateway = 'http://localhost:9230/api/v1';
-  #basePath = '';
-  #bankBasePath = '';
-  // #merchantGwHost = 'https://mgw-test.finviet.com.vn:6868/api';
-
+  merchantCode = '';
+  secretKey = '';
+  gateway = '';
+  basePath = '';
+  bankBasePath = '';
+  static Tokenization = TokenizationSDK;
   #tokenization;
 
   constructor(initConfig: IInitSdkConfig) {
-    this.#secretKey = initConfig.secretKey;
-    this.#merchantCode = initConfig.merchantCode;
-    this.#gateway = 'http://localhost:9230/api/v1';
-    this.#basePath = '/payment';
-    this.#bankBasePath = '/bank';
-    this.#tokenization = new Tokenization(initConfig);
+    this.secretKey = initConfig.secretKey;
+    this.merchantCode = initConfig.merchantCode;
+    this.gateway = 'https://mgw-test.finviet.com.vn:6868/api/v1';
+    this.basePath = '/payment';
+    this.bankBasePath = '/bank';
+    this.#tokenization = new TokenizationSDK({
+      ...initConfig,
+      gateway: this.gateway,
+    });
   }
 
   // features
@@ -43,31 +46,31 @@ export class EcoPaySDK {
   ): Promise<ICommonResponseData> {
     const initData = this.validateInitTransactionData({
       ...data,
-      merchant_code: this.#merchantCode,
+      merchant_code: this.merchantCode,
       req_time: Date.now(),
     });
-    const finalData = getFinalData(initData, this.#secretKey);
+    const finalData = getFinalData(initData, this.secretKey);
 
     return makeRequest(
-      `${this.#gateway}${this.#basePath}/init`,
+      `${this.gateway}${this.basePath}/init`,
       'POST',
       finalData,
-      this.#secretKey
+      this.secretKey
     );
   }
 
   checkTransaction(merchantCodeId: string): Promise<ICommonResponseData> {
     const checkTransData: ICheckTransaction = {
-      merchant_code: this.#merchantCode,
+      merchant_code: this.merchantCode,
       req_time: Date.now(),
       merchant_order_id: merchantCodeId,
     };
-    const finalData = getFinalData(checkTransData, this.#secretKey);
+    const finalData = getFinalData(checkTransData, this.secretKey);
     return makeRequest(
-      `${this.#gateway}${this.#basePath}/checktrans`,
+      `${this.gateway}${this.basePath}/checktrans`,
       'POST',
       finalData,
-      this.#secretKey
+      this.secretKey
     );
   }
 
@@ -75,10 +78,10 @@ export class EcoPaySDK {
     queryParams: IGetSupportBanks = {}
   ): Promise<ICommonResponseData> {
     return makeRequest(
-      `${this.#gateway}${this.#bankBasePath}/get-list`,
+      `${this.gateway}${this.bankBasePath}/get-list`,
       'GET',
       queryParams,
-      this.#secretKey
+      this.secretKey
     );
   }
 

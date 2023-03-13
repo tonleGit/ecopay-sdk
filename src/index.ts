@@ -11,11 +11,11 @@ import {
   ICheckTransaction,
 } from './types';
 
-import { EcoPaySDK, Tokenization } from './features';
+import { EcoPaySDK, TokenizationSDK } from './features';
 
 export {
   IInitTransactionData,
-  ICommonResponseData as ICommonTransactionResponseData,
+  ICommonResponseData,
   IInitSdkConfig,
   IInitTokenizationConfig,
   IInitTokenizationData,
@@ -24,4 +24,4 @@ export {
   ICheckTransaction,
 };
 
-export { EcoPaySDK, Tokenization };
+export { EcoPaySDK, TokenizationSDK };
