@@ -1,7 +1,7 @@
 {
   "name": "ecopay",
   "title": "EcoPay SDK",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "SDK for EcoPay Payment Platform",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
