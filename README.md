@@ -70,12 +70,13 @@ const token = new TokenizationSDK({
 
 ### TokenizationSDK
 
-| Signature                                                                                  | Description                                                                                  |
+\* These methods can be called directly on EcoPaySDK instance for short. Example: ecopaySDKInstance.initTokenization,...
+| Signature | Description |
 | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| TokenizationSDK(params: [IInitSdkConfig](#IInitSdkConfig))                                 | Init SDK                                                                                     |
-| initTokenization(params: [IInitTokenizationData](#IInitTokenizationData))                  | Create tokenization transaction                                                              |
-| updateTokenzation(id: string, params: [IUpdateTokenizationData](#IUpdateTokenizationData)) | Update tokenization information                                                              |
-| getTokenizations(params: [IGetTokenization](#IGetTokenization), id?: string)               | Get a list of tokenizations if id is omitted, otherwise get a detail of tokenization with id |
+| TokenizationSDK(params: [IInitSdkConfig](#IInitSdkConfig)) | Init SDK |
+| initTokenization(params: [IInitTokenizationData](#IInitTokenizationData)) | Create tokenization transaction |
+| updateTokenzation(id: string, params: [IUpdateTokenizationData](#IUpdateTokenizationData)) | Update tokenization information |
+| getTokenizations(params: [IGetTokenization](#IGetTokenization), id?: string) | Get a list of tokenizations if id is omitted, otherwise get a detail of tokenization with id |
 
 ### Return type
 
