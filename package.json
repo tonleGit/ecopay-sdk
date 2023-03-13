@@ -1,7 +1,7 @@
 {
   "name": "ecopay",
   "title": "EcoPay SDK",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "SDK for EcoPay Payment Platform",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -34,15 +34,14 @@
     "node": ">=12.0"
   },
   "keywords": [
-    "boilerplate",
-    "template",
-    "typescript",
-    "vscode",
-    "jest",
-    "husky",
-    "commitizen",
-    "semantic-release",
-    "codecov"
+    "ecopay",
+    "ecopay payment",
+    "ecpay",
+    "ecopay nodejs",
+    "ecopay npm",
+    "ecpay nodejs",
+    "ecpay npm",
+    "eco"
   ],
   "bugs": {
     "url": "https://github.com/tonleGit/ecopay-sdk/issues"
