@@ -135,6 +135,7 @@ export class EcoPaySDK {
         );
       newData[key] = extraData[key];
     }
+    newData.payment_type = '05';
     return newData;
   }
 

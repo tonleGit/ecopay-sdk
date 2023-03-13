@@ -16,10 +16,20 @@ export interface IInitTransactionExtraData extends Record<string, unknown> {
   purpose_of_transaction?: string;
   extra_data?: any;
   bank_type?: string;
-  partner_code?: string;
   bank_code?: string;
-  payment_type: string;
-  installment_info?: any;
+  payment_type?: string;
+  installment_info?: IInstallmentInfo;
+}
+
+interface IInstallmentInfo {
+  products: IProduct[];
+}
+interface IProduct {
+  code: string;
+  name: string;
+  category: string;
+  quantity: number;
+  unit_price: number;
 }
 
 export interface ICheckTransaction extends Record<string, unknown> {

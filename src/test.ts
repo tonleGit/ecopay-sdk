@@ -6,7 +6,7 @@ import { EcoPaySDK } from './features';
 const sampleData = {
   merchant_code: 'FVMER0',
   platform: 'web',
-  payment_channel: 'all',
+  payment_channel: 'eco_merchant',
   merchant_order_id: 'testsdk' + Date.now().toString(20),
   amount: 25000,
   description: 'thanh toan',
@@ -18,8 +18,19 @@ const sampleData = {
   terminal_code: '0344567890',
   purpose_of_transaction: 'Thanh toan Eco',
   req_time: Date.now(),
-  extra_data: null,
-  payment_type: '05',
+  bank_type: 'international',
+  bank_code: 'ALP',
+  installment_info: {
+    products: [
+      {
+        code: 'LAPTOP01',
+        name: 'Laptop Gaming',
+        category: 'LAPTOP',
+        quantity: 2,
+        unit_price: 2500000,
+      },
+    ],
+  },
 };
 
 const tokenizationData = {
@@ -70,7 +81,7 @@ const ecp = new EcoPaySDK({
 });
 
 ecp
-  .checkTransaction('testsdk35b980f5ei')
+  .initTransaction(sampleData)
   .then(data => console.log('data', data))
   .catch(err => console.error('Error:', err));
 
