@@ -4,7 +4,7 @@ echo "Run type checking before build"
 npm run typecheck
 
 echo "Building..."
-npm run build
+npm run build && rm -rf lib/test*
 
 echo "Publish..."
 npm publish

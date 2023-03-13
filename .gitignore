@@ -118,3 +118,5 @@ dist
 # Compiled code
 lib/
 package-lock.json
+.npmignore
+src/test.ts
