@@ -23,7 +23,7 @@ const sampleData: IInitTransactionRequiredData & IInitTransactionExtraData = {
   // your data here
 };
 
-ecopayIns.initTransaction(sampleData);
+ecopayIns.initTransaction(sampleData); // Promise<ICommonResponseData>
 ```
 
 > Check status of transaction
@@ -31,7 +31,7 @@ ecopayIns.initTransaction(sampleData);
 ```ts
 // other import like above
 ...
-ecopayIns.checkTransaction("<merchant_order_id>");
+ecopayIns.checkTransaction("<merchant_order_id>");  // Promise<ICommonResponseData>
 
 ```
 
@@ -80,11 +80,11 @@ const token = new TokenizationSDK({
 
 ### Return type
 
-All the above mthods have return type of Promise[<ICommonResponseData\>](#ICommonResponseData)
+All the above methods have return data of type of Promise[<ICommonResponseData\>](#ICommonResponseData)
 
 ## Interface
 
-> \*: required
+> (\*) required
 
 ### <a name="IInitSdkConfig">IInitSdkConfig</a>
 
@@ -106,11 +106,11 @@ Required parameters when creating payment transaction
 > | merchant_order_id(\*) | string | Unique order ID                                                                                                                                                                                                                                    |
 > | amount(\*)            | number | Amount of transaction                                                                                                                                                                                                                              |
 > | description(\*)       | string | Description of transaction                                                                                                                                                                                                                         |
-> | redirect_url(\*)      | string | Url to notify transaction result                                                                                                                                                                                                                   |
+> | redirect_url(\*)      | string | Url to notify transaction result to merchant                                                                                                                                                                                                       |
 > | currency(\*)          | string | Curreny. 'VND' supported only                                                                                                                                                                                                                      |
 > | store_label(\*)       | string | Store label                                                                                                                                                                                                                                        |
 > | store_code(\*)        | string | Store code                                                                                                                                                                                                                                         |
-> | terminal_label(\*)    | string | Termianl label                                                                                                                                                                                                                                     |
+> | terminal_label(\*)    | string | Terminal label                                                                                                                                                                                                                                     |
 > | terminal_code(\*)     | string | Terminal code                                                                                                                                                                                                                                      |
 
 ### <a name="IInitTransactionExtraData">IInitTransactionExtraData</a>
@@ -147,21 +147,21 @@ Installment products info
 
 ### <a name="IGetSupportBanks">IGetSupportBanks</a>
 
-> | Field           | Type    | Description                         |
-> | --------------- | ------- | ----------------------------------- |
-> | disabled_paging | boolean | If not passed, paginate return data |
-> | page_size       | number  | Page size. Default: 20              |
-> | code            | string  | Bank code                           |
-> | partner_code    | string  | Partner code                        |
-> | sort            | string  | Sort field                          |
-> | status          | string  | Status: 'active' or 'inactive'      |
-> | type            | string  | Type of bank                        |
+> | Field           | Type    | Description                                 |
+> | --------------- | ------- | ------------------------------------------- |
+> | disabled_paging | boolean | Pagination or not. Default false            |
+> | page_size       | number  | Page size. Default: 20                      |
+> | code            | string  | Bank code                                   |
+> | partner_code    | string  | Partner code                                |
+> | sort            | string  | Sort field. Example: 'created_at'           |
+> | status          | string  | Status: 'active' or 'inactive'              |
+> | type            | string  | Type of bank: 'domestic' or 'international' |
 
 ### <a name="IInitTokenizationData">IInitTokenizationData</a>
 
 > | Field                | Type   | Description                                     |
 > | -------------------- | ------ | ----------------------------------------------- |
-> | merchant_user_id(\*) | string | User id                                         |
+> | merchant_user_id(\*) | string | Merchant user id                                |
 > | redirect_url(\*)     | string | Redirect url to merchant                        |
 > | description(\*)      | string | Description                                     |
 > | bank_type(\*)        | string | Bank type. Value: 'domestic' or 'international' |
@@ -174,7 +174,7 @@ Installment products info
 
 > | Field                | Type   | Description                                     |
 > | -------------------- | ------ | ----------------------------------------------- |
-> | merchant_user_id(\*) | string | User id                                         |
+> | merchant_user_id(\*) | string | Merchant user id when create tokenization       |
 > | bank_type(\*)        | string | Bank type. Value: 'domestic' or 'international' |
 > | status(\*)           | string | Tokenization status                             |
 
@@ -186,14 +186,24 @@ Installment products info
 > | bank_type(\*)        | string | Bank type. Value: 'domestic' or 'international' |
 > | status               | string | Tokenization status                             |
 > | pageSize             | number | Page size                                       |
-> | currentPage          | string | Current page to get data                        |
+> | currentPage          | string | Current page to get data. Default 1             |
 
 ### <a name="ICommonResponseData">ICommonResponseData</a>
 
-> | Field           | Type   | Description                                                    |
-> | --------------- | ------ | -------------------------------------------------------------- |
-> | result_code(\*) | string | Result code. Example: '010200'                                 |
-> | message_key(\*) | string | Result message key. Example: 'SUCCESS'                         |
-> | message(\*)     | string | Detail result message                                          |
-> | data            | any    | Data                                                           |
-> | signature       | string | Checksum of data. Use this to validate integrity of field data |
+> | Field           | Type            | Description                                                     |
+> | --------------- | --------------- | --------------------------------------------------------------- |
+> | result_code(\*) | string          | Result code. Example: '010200'                                  |
+> | message_key(\*) | string          | Result message key. Example: 'SUCCESS', 'FAILED', 'UNKNOWN',... |
+> | message(\*)     | string          | Detail result message                                           |
+> | data            | Array or Object | Data return                                                     |
+> | signature       | string          | Checksum of data. Use this to validate integrity of field data  |
+>
+> Fields of data when init payment transaction or tokenization successfully:
+
+> | Field            | Type   | Description                      |
+> | ---------------- | ------ | -------------------------------- |
+> | payment_url(\*)  | string | Payment url                      |
+> | transid(\*)      | string | Transaction id in EcoPay system  |
+> | status(\*)       | string | Transaction status               |
+> | expired_at(\*)   | string | Time when transaction is expired |
+> | expired_time(\*) | number | Time duration until expired_at   |
