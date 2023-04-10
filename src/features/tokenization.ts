@@ -12,11 +12,15 @@ import { getFinalData, makeRequest } from '../utils';
 
 export class TokenizationSDK {
   tokenConfig: IInitTokenizationConfig;
+  gateway: string;
   basePath: string;
 
   constructor(initTokenConfig: IInitTokenizationConfig) {
     this.tokenConfig = initTokenConfig;
-    this.tokenConfig.gateway = 'https://mgw-test.finviet.com.vn:6868/api/v1';
+    this.gateway =
+      initTokenConfig.environment === 'PROD'
+        ? 'https://mgw.finviet.com.vn:6868/api/v1'
+        : 'https://mgw-test.finviet.com.vn:6868/api/v1';
     this.basePath = '/tokenizations';
   }
 
@@ -27,7 +31,7 @@ export class TokenizationSDK {
     const finalData = getFinalData(validData, this.tokenConfig.secretKey);
 
     return makeRequest(
-      `${this.tokenConfig.gateway}${this.basePath}`,
+      `${this.gateway}${this.basePath}`,
       'POST',
       finalData,
       this.tokenConfig.secretKey
@@ -42,7 +46,7 @@ export class TokenizationSDK {
     const finalData = getFinalData(validData, this.tokenConfig.secretKey);
 
     return makeRequest(
-      `${this.tokenConfig.gateway}${this.basePath}/${id}`,
+      `${this.gateway}${this.basePath}/${id}`,
       'PUT',
       finalData,
       this.tokenConfig.secretKey
@@ -57,8 +61,8 @@ export class TokenizationSDK {
     const queryParams = getFinalData(validData, this.tokenConfig.secretKey);
 
     const url = id
-      ? `${this.tokenConfig.gateway}${this.basePath}/${id}`
-      : `${this.tokenConfig.gateway}${this.basePath}`;
+      ? `${this.gateway}${this.basePath}/${id}`
+      : `${this.gateway}${this.basePath}`;
 
     return makeRequest(url, 'GET', queryParams, this.tokenConfig.secretKey);
   }

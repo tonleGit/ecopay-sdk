@@ -31,12 +31,14 @@ export class EcoPaySDK {
   constructor(initConfig: IInitSdkConfig) {
     this.secretKey = initConfig.secretKey;
     this.merchantCode = initConfig.merchantCode;
-    this.gateway = 'https://mgw-test.finviet.com.vn:6868/api/v1';
+    this.gateway =
+      initConfig.environment === 'PROD'
+        ? 'https://mgw.finviet.com.vn:6868/api/v1'
+        : 'https://mgw-test.finviet.com.vn:6868/api/v1';
     this.basePath = '/payment';
     this.bankBasePath = '/bank';
     this.#tokenization = new TokenizationSDK({
       ...initConfig,
-      gateway: this.gateway,
     });
   }
 

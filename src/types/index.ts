@@ -3,6 +3,7 @@ export * from './tokenization.type';
 export interface IInitSdkConfig extends Record<string, unknown> {
   secretKey: string;
   merchantCode: string;
+  environment: 'DEV' | 'PROD';
 }
 
 export interface IInitTokenizationConfig
