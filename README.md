@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-npm install ecopay
+npm install ecopay-sdk
 ```
 
 ## Payment transaction
@@ -13,7 +13,7 @@ npm install ecopay
 > Create payment transaction:
 
 ```ts
-import { EcoPaySDK } from 'ecopay';
+import { EcoPaySDK } from 'ecopay-sdk';
 
 const ecopayIns = new EcoPaySDK({
   // config parameters
@@ -40,7 +40,7 @@ ecopayIns.checkTransaction("<merchant_order_id>");  // Promise<ICommonResponseDa
 Initialize Tokenization from EcoPaySDK or separate Tokenization class:
 
 ```ts
-import { EcoPaySDK } from 'ecopay';
+import { EcoPaySDK } from 'ecopay-sdk';
 ...
 const token = new EcoPaySDK.Tokenization({
     // config parameters
@@ -50,7 +50,7 @@ const token = new EcoPaySDK.Tokenization({
 or
 
 ```ts
-import { TokenizationSDK } from 'ecopay';
+import { TokenizationSDK } from 'ecopay-sdk';
 ...
 const token = new TokenizationSDK({
     // config parameters
@@ -90,10 +90,11 @@ All the above methods have return data of type of Promise[<ICommonResponseData\>
 
 EcoPaySDK init params
 
-> | Field        | Type   | Description         |
-> | ------------ | ------ | ------------------- |
-> | secretKey    | string | Merchant secret key |
-> | merchantCode | string | Merchant code       |
+> | Field        | Type   | Description              |
+> | ------------ | ------ | ------------------------ |
+> | secretKey    | string | Merchant secret key      |
+> | merchantCode | string | Merchant code            |
+> | environment  | string | Environment: DEV or PROD |
 
 ### <a name="IInitTransactionRequiredData">IInitTransactionRequiredData</a>
 

@@ -78,6 +78,7 @@ const updateTokenData = {
 const ecp = new EcoPaySDK({
   merchantCode: 'FVMER0',
   secretKey: '1234',
+  environment: 'DEV',
 });
 
 ecp
